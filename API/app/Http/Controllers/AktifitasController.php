@@ -24,7 +24,7 @@ class AktifitasController extends Controller
 
     public function all()
     {
-        $aktifitas = Aktifitas::all();
+        $aktifitas = Aktifitas::with('user')->get();
         return response()->json($aktifitas);
     }
 

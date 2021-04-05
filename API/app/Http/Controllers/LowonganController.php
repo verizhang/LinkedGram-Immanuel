@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lowongan;
+use App\Models\Pelamar;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Validator;
@@ -16,24 +17,26 @@ class LowonganController extends Controller
      */
     public function index($user_id)
     {
-        $lowongan = User::with('lowongan','pelamar')->where('id',$user_id)->get();
+        $lowongan = User::with(['lowongan','lowongan.pelamar','lowongan.pelamar.user'])->where('id',$user_id)->get();
         return response()->json($lowongan);
     }
 
     public function all()
     {
-        $lowongan = Lowongan::with('user')->get();        
+        $lowongan = Lowongan::with(['user','pelamar','pelamar.user'])->get();
         return response()->json($lowongan);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function lamar(Request $request)
     {
-        //
+        $pelamar = new Pelamar();
+        $pelamar->lowongan_id = $request->lowongan_id;
+        $pelamar->user_id = $request->user_id;
+        $pelamar->save();
+        
+        return response()->json([
+            "message"=>"success"
+        ]);
     }
 
     /**

@@ -11,6 +11,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Models\Profile;
 use App\Models\Aktifitas;
 use App\Models\Lowongan;
+use App\Models\Pelamar;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -66,5 +67,9 @@ class User extends Authenticatable implements JWTSubject
     public function lowongan()
     {
         return $this->hasMany(Lowongan::class);
+    }
+    public function pelamar()
+    {
+        return $this->hasMany(Pelamar::class);
     }
 }

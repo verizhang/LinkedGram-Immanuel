@@ -41,6 +41,7 @@ Route::post('/login', [UserController::class,'login']);
 
     Route::group(['prefix'=>'/lowongan'],function(){
         Route::post('', [LowonganController::class, 'store']);
+        Route::post('/lamar', [LowonganController::class, 'lamar']);
         Route::get('', [LowonganController::class, 'all']);
         Route::get('/{user_id}', [LowonganController::class, 'index']);
     });
