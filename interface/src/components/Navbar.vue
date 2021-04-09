@@ -18,18 +18,18 @@
                          <a class="nav-link" href="">Lowongan</a>
                     </router-link>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item active" v-if="!auth">
                     <router-link :to="{name:'register'}">
                         <a class="nav-link text-decoration-none mx-1" id="register">Daftar</a>
                     </router-link>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item active" v-if="!auth">
                     <router-link :to="{name:'login'}">
                         <a class="nav-link text-decoration-none mx-1" id="login">Masuk</a>
                     </router-link>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link text-decoration-none mx-1">Keluar</a>
+                <li class="nav-item active" v-if="auth">
+                    <a class="nav-link text-decoration-none mx-1 btn" @click="logout">Keluar</a>
                 </li>
             </ul>
         </div>
@@ -41,14 +41,22 @@ export default {
     name:'Navbar',
     data: function(){
         return {
-            auth: true
+            auth: false
         }
     },
     mounted: function(){
-        
+        let localAuth = JSON.parse(localStorage.getItem('alumni-smk-kristen-immanuel-pontianak'));
+        if(localAuth){
+            this.auth = true;
+        }else{
+            this.auth = false;
+        }
     },
     methods:{
-       
+        logout: function(){
+            localStorage.removeItem('alumni-smk-kristen-immanuel-pontianak');
+            window.location.href = "/";
+        }
     }
 }
 </script>

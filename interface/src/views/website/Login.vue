@@ -46,17 +46,13 @@ export default {
             axios.post(this.api+'login',formData)
             .then(function(response){
                 if(response.data){
-                    let authData = {
-                        status:response.data.user.profile.status,
-                        token:response.data.token
+                    let auth = {
+                        user_id: response.data.user.id,
+                        nama: response.data.user.nama,
+                        profile: response.data.user.profile.gambar
                     };
-
-                    localStorage.setItem('smk-kristen-immanuel-pontianak', JSON.stringify(authData));
-                    if(authData.status == 'admin'){
-                        window.location.href = "/admin/user";
-                    }else{
-                        window.location.href = "/";
-                    }
+                    localStorage.setItem('alumni-smk-kristen-immanuel-pontianak', JSON.stringify(auth));
+                    window.location.href = "/";
                 }
             }).catch(error => this.data.incredential = true);
         }

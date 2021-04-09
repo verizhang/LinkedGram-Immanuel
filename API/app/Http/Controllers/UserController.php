@@ -70,6 +70,8 @@ class UserController extends Controller
         $profile->save();
         
         $token = JWTAuth::fromUser($user);
+        
+        $user = User::with('profile')->where('email',$request->email)->first();
 
         return response()->json(compact('user','token'),201);
     }
