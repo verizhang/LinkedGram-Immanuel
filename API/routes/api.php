@@ -44,5 +44,6 @@ Route::post('/login', [UserController::class,'login']);
         Route::post('/lamar', [LowonganController::class, 'lamar']);
         Route::get('', [LowonganController::class, 'all']);
         Route::get('/{user_id}', [LowonganController::class, 'index']);
+        Route::get('detail/{lowongan_id}', [LowonganController::class, 'detail']);
     });
 //});
