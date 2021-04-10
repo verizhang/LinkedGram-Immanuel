@@ -9,31 +9,14 @@
                 <div class="container container-content-view">
                     <div class="row">
                         <div class="col-12">
-                            <div class="card w-100 my-2">
-                                <img class="card-img-top" src="@/assets/image/gedung.jpg" alt="Card image cap">
+                            <div class="card w-100 my-2" v-for="item in aktifitas" :key="item.id">
+                                <img class="card-img-top" :src="'http://localhost:8000/' + item.gambar" alt="Card image cap">
                                 <div class="card-body">
-                                    <h6>Card title</h6>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    
+                                    <h4>{{item.user.nama}}</h4>
+                                    <h6>{{item.judul_aktifitas}}</h6>
+                                    <p class="card-text">{{item.deskripsi_aktifitas}}</p>  
                                 </div>
                             </div>
-                            <div class="card w-100 my-2">
-                                <img class="card-img-top" src="@/assets/image/gedung.jpg" alt="Card image cap">
-                                <div class="card-body">
-                                    <h6>Card title</h6>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    
-                                </div>
-                            </div>
-                            <div class="card w-100 my-2">
-                                <img class="card-img-top" src="@/assets/image/gedung.jpg" alt="Card image cap">
-                                <div class="card-body">
-                                    <h6>Card title</h6>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    
-                                </div>
-                            </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -42,11 +25,28 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
 import SideProfile from '@/components/SideProfile.vue';
 export default {
+    data(){
+        return {
+            aktifitas:[],
+        }
+    },
+    mounted(){
+        this.requestAktifitas();
+    },
     components:{
         SideProfile
     },
+    methods:{
+        requestAktifitas: async function(){
+            let request =await axios.get(this.api+'aktifitas').then(function(response){
+                return response.data;
+            }).catch(error => console.log(error));
+            this.aktifitas = request;
+        }
+    }
 }
 </script>
 <style scoped>

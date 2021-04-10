@@ -1,8 +1,10 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-light bg-light bg-white shadow-sm fixed-top">
-        <a class="navbar-brand" href="#">
-            LinkedGram
-        </a>
+        <router-link :to="{name:'home'}">
+            <a class="navbar-brand" href="#">
+                LinkedGram
+            </a>
+        </router-link>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

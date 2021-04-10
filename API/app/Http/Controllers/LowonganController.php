@@ -17,19 +17,19 @@ class LowonganController extends Controller
      */
     public function index($user_id)
     {
-        $lowongan = User::with(['lowongan','lowongan.pelamar'])->where('id',$user_id)->get();
+        $lowongan = User::with(['profile','lowongan','lowongan.pelamar'])->where('id',$user_id)->get();
         return response()->json($lowongan);
     }
 
     public function all()
     {
-        $lowongan = Lowongan::with(['user','pelamar'])->get();
+        $lowongan = Lowongan::with(['user','pelamar'])->orderBy('id','desc')->get();
         return response()->json($lowongan);
     }
 
     public function detail($lowongan_id)
     {
-        $lowongan = Lowongan::with(['pelamar.user'])->where('id', $lowongan_id)->get();
+        $lowongan = Lowongan::with(['pelamar.user.profile'])->where('id', $lowongan_id)->first();
         return response()->json($lowongan);
     }
 

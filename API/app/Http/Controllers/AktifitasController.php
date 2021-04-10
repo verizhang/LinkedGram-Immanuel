@@ -18,13 +18,16 @@ class AktifitasController extends Controller
      */
     public function index($user_id)
     {
-        $aktifitas = User::with('aktifitas')->where('id', $user_id)->get();
+        $aktifitas = User::with(array('profile','aktifitas'=> function($query){
+                $query->orderBy('id','desc');
+            }))->where('id', $user_id)->get();
+
         return response()->json($aktifitas);
     }
 
     public function all()
     {
-        $aktifitas = Aktifitas::with('user')->get();
+        $aktifitas = Aktifitas::with('user')->orderBy('id','desc')->get();
         return response()->json($aktifitas);
     }
 

@@ -9,6 +9,7 @@ import ProfileAktifitas from '../views/website/ProfileAktifitas.vue';
 import ProfileLowongan from '../views/website/ProfileLowongan.vue';
 import BuatAktifitas from '../views/website/BuatAktifitas.vue';
 import BuatLowongan from '../views/website/BuatLowongan.vue';
+import DetailLowongan from '../views/website/DetailLowongan.vue';
 
 
 Vue.use(VueRouter)
@@ -53,6 +54,11 @@ const routes = [
     path:'/buatLowongan',
     name:'buatLowongan',
     component: BuatLowongan,
+  },
+  {
+    path:'/detailLowongan/:id',
+    name:'detailLowongan',
+    component: DetailLowongan,
   },
 ]
 
